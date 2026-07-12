@@ -1,0 +1,50 @@
+.plan-doc {
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-1);
+  display: flex; flex-direction: column;
+}
+.plan-doc .doc-head { border-bottom: 2px solid var(--ink); padding: 20px 24px 14px; display: flex; align-items: baseline; }
+.plan-doc .doc-head .mono-label { color: var(--ink); }
+.plan-doc .doc-body { padding: 8px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+.plan-row {
+  display: flex; justify-content: space-between; gap: 12px;
+  padding: 11px 0; border-bottom: 1px solid var(--line);
+  font: var(--type-small); color: var(--ink);
+}
+.plan-row .val { font: var(--type-mono-data); font-size: 13px; }
+.plan-row .yes { color: var(--stamp-green); }
+.plan-row .no { color: var(--text-muted); }
+.plan-growth { border: 2px solid var(--ink); position: relative; }
+.plan-growth::before {
+  content: "Most suppliers start here";
+  position: absolute; top: -13px; left: 20px;
+  font: var(--type-mono-label); letter-spacing: .08em; text-transform: uppercase;
+  background: var(--weld); color: #fff; padding: 5px 10px;
+}
+.plan-ent { background: var(--surface-dark); color: var(--text-inverse); border-color: var(--ink); }
+.plan-ent .doc-head { border-bottom-color: var(--steel-2); }
+.plan-ent .plan-row { color: var(--text-inverse); border-bottom-color: #3a3f44; }
+.plan-ent .plan-row .no { color: var(--steel-2); }
+.plan-ent .plan-row .yes { color: #6fa986; }
+.plan-ent .doc-head .mono-label { color: #a8b0b6; }
+.plan-ent .doc-body .small { color: #a8b0b6; }
+
+.toggle {
+  display: inline-flex; border: 1px solid var(--ink); border-radius: var(--radius-1); overflow: hidden;
+}
+.toggle button {
+  font: 600 14px/1 var(--font-body); padding: 10px 18px;
+  background: transparent; color: var(--ink); border: none; cursor: pointer;
+}
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--text-inverse); }
+
+details.q { border-top: 1px solid var(--line); }
+details.q summary {
+  font: var(--type-title); cursor: pointer; padding: 18px 0; list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+details.q summary::-webkit-details-marker { display: none; }
+details.q summary::after { content: "+"; font: 500 20px/1 var(--font-mono); color: var(--weld); }
+details.q[open] summary::after { content: "\2212"; }
+details.q p { padding: 0 0 18px; color: var(--text-secondary); max-width: 62ch; }
