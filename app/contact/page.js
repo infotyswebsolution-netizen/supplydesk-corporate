@@ -2,12 +2,14 @@ import { Nav } from "@/components/Nav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactForm } from "@/components/ContactForm";
 import { SectionHead } from "@/components/SectionHead";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Talk to us",
   description:
     "Let's see if SupplyDesk fits your operation. Request a demo — we'll reply within 1 business day.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

@@ -6,16 +6,38 @@ import { Reveal } from "@/components/Reveal";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { SectionHead } from "@/components/SectionHead";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_URL, ORG_NAME, pageMetadata } from "@/lib/site";
+import { plans } from "@/lib/pricing";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Private ordering portals for industrial suppliers",
   description:
     "Your buyers still order by phone, email, and PDF price list. SupplyDesk replaces all three with a private buyer portal — their catalog, their price, their order history.",
+  path: "/",
+});
+
+const softwareApplicationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: ORG_NAME,
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: SITE_URL,
+  offers: plans.map((plan) => ({
+    "@type": "Offer",
+    name: plan.name,
+    price: String(plan.monthly),
+    priceCurrency: "USD",
+    url: `${SITE_URL}/pricing`,
+  })),
 };
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={softwareApplicationJsonLd} />
+
       <div className="form-strip">
         <div className="container">
           <span>Form SD-100 &middot; Rev 06/26</span>

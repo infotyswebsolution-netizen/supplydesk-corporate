@@ -3,16 +3,35 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { FooterCta } from "@/components/FooterCta";
 import { Reveal } from "@/components/Reveal";
 import { SectionHead } from "@/components/SectionHead";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_URL, ORG_NAME, pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "About",
   description:
     "Industrial suppliers were running their B2B ordering on email, PDF price lists, and phone calls. Nothing purpose-built existed for them. So we built SupplyDesk.",
+  path: "/about",
+});
+
+// mainEntity omits address/foundingDate for the same reason noted in
+// app/layout.js — the "Columbus, Ohio · Est. 2024" copy on this page is
+// unconfirmed and must not be propagated into structured data.
+const aboutPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  url: `${SITE_URL}/about`,
+  mainEntity: {
+    "@type": "Organization",
+    name: ORG_NAME,
+    url: SITE_URL,
+  },
 };
 
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={aboutPageJsonLd} />
+
       <Nav />
 
       <header className="po-section">

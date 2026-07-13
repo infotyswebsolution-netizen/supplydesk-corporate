@@ -1,66 +1,10 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Reveal } from "./Reveal";
 import { Button } from "./Button";
-
-// Annual billing = 2 months free (10 months' worth of the monthly price),
-// spread across 12 months for the displayed per-month rate.
-function annualTotal(monthly) {
-  return monthly * 10;
-}
-function annualMonthly(monthly) {
-  return Math.round(annualTotal(monthly) / 12);
-}
-
-const plans = [
-  {
-    key: "starter",
-    label: "Plan 01 / Starter",
-    className: "",
-    monthly: 79,
-    rows: [
-      { label: "Buyers", value: "Up to 3" },
-      { label: "Buyer portal", value: "Included", tone: "yes" },
-      { label: "Order management", value: "Included", tone: "yes" },
-      { label: "QuickBooks sync", value: "—", tone: "no" },
-      { label: "RFQ management", value: "—", tone: "no" },
-      { label: "Support", value: "Email" },
-    ],
-    ctaVariant: "secondary",
-  },
-  {
-    key: "growth",
-    label: "Plan 02 / Growth",
-    className: "plan-growth",
-    monthly: 199,
-    rows: [
-      { label: "Buyers", value: "Up to 15" },
-      { label: "Buyer portal", value: "Included", tone: "yes" },
-      { label: "Order management", value: "Included", tone: "yes" },
-      { label: "QuickBooks sync", value: "Included", tone: "yes" },
-      { label: "RFQ management", value: "—", tone: "no" },
-      { label: "Support", value: "Priority" },
-    ],
-    ctaVariant: "primary",
-  },
-  {
-    key: "enterprise",
-    label: "Plan 03 / Enterprise",
-    className: "plan-ent",
-    monthly: 399,
-    rows: [
-      { label: "Buyers", value: "Unlimited" },
-      { label: "Buyer portal", value: "Included", tone: "yes" },
-      { label: "Order management", value: "Included", tone: "yes" },
-      { label: "QuickBooks sync", value: "Included", tone: "yes" },
-      { label: "RFQ management", value: "Included", tone: "yes" },
-      { label: "Support", value: "Dedicated" },
-    ],
-    ctaVariant: "primary",
-    ctaStyle: { background: "var(--weld)", borderColor: "var(--weld)" },
-  },
-];
+import { plans, annualTotal, annualMonthly } from "@/lib/pricing";
 
 export function PricingPlans() {
   const [billing, setBilling] = React.useState("monthly");
@@ -121,6 +65,16 @@ export function PricingPlans() {
           </Reveal>
         ))}
       </div>
+
+      <p className="small" style={{ marginTop: 20 }}>
+        16&ndash;50 buyers doesn&rsquo;t sort neatly into Growth or Enterprise by count
+        alone &mdash; most suppliers in that range move to Enterprise once QuickBooks sync
+        or RFQ management is the actual requirement, not the buyer number.{" "}
+        <Link className="text-link" href="/contact" style={{ fontSize: 14 }}>
+          Talk to us
+        </Link>{" "}
+        and we&rsquo;ll tell you plainly which plan fits.
+      </p>
 
       <Reveal
         style={{

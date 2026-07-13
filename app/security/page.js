@@ -3,12 +3,14 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { FooterCta } from "@/components/FooterCta";
 import { Reveal } from "@/components/Reveal";
 import { SectionHead } from "@/components/SectionHead";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Security",
   description:
     "Your buyers' data and your pricing stay private. Here is exactly how it's protected — no badges, no vague claims.",
-};
+  path: "/security",
+});
 
 const sections = [
   {

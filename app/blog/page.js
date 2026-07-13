@@ -5,12 +5,14 @@ import { FooterCta } from "@/components/FooterCta";
 import { Reveal } from "@/components/Reveal";
 import { SectionHead } from "@/components/SectionHead";
 import { posts } from "@/lib/posts";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Blog",
   description:
     "Specific, operational notes on running a supply business — written by the people who build SupplyDesk.",
-};
+  path: "/blog",
+});
 
 export default function BlogPage() {
   return (

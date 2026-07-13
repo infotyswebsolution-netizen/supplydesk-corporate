@@ -5,6 +5,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
 import { SectionHead } from "@/components/SectionHead";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_URL, ORG_NAME, pageMetadata } from "@/lib/site";
 import { posts, getPost } from "@/lib/posts";
 
 export function generateStaticParams() {
@@ -15,10 +17,11 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  return {
+  return pageMetadata({
     title: post.title,
     description: post.excerpt,
-  };
+    path: `/blog/${post.slug}`,
+  });
 }
 
 function ArticleBody({ body }) {
@@ -46,8 +49,22 @@ export default async function BlogPostPage({ params }) {
   const post = getPost(slug);
   if (!post) notFound();
 
+  const blogPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.datePublished,
+    articleSection: post.tag,
+    url: `${SITE_URL}/blog/${post.slug}`,
+    author: { "@type": "Organization", name: ORG_NAME },
+    publisher: { "@type": "Organization", name: ORG_NAME },
+  };
+
   return (
     <>
+      <JsonLd data={blogPostingJsonLd} />
+
       <Nav />
 
       <header className="po-section" style={{ paddingBottom: 0 }}>
