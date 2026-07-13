@@ -279,6 +279,38 @@ export default function HomePage() {
                 </tr>
               </tbody>
             </table>
+            <div className="order-cards">
+              {plans.map((plan) => (
+                <div className={`plan-doc ${plan.className}`.trim()} key={plan.key}>
+                  <div className="doc-head">
+                    <span className="mono-label">{plan.name}</span>
+                  </div>
+                  <div className="doc-body">
+                    <p style={{ margin: "14px 0 2px" }}>
+                      <span className="mono-data" style={{ fontSize: 28 }}>${plan.monthly}</span>
+                      <span className="small">/mo</span>
+                    </p>
+                    <div style={{ marginTop: 12 }}>
+                      {plan.rows
+                        .filter((row) => ["Buyers", "QuickBooks sync", "RFQ management"].includes(row.label))
+                        .map((row) => (
+                          <div className="plan-row" key={row.label}>
+                            <span>{row.label}</span>
+                            <span className={`val ${row.tone || ""}`.trim()}>{row.value}</span>
+                          </div>
+                        ))}
+                    </div>
+                    <a
+                      className="text-link"
+                      href="/pricing"
+                      style={{ fontSize: 14, marginTop: 16, display: "inline-block" }}
+                    >
+                      Full detail &rarr;
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
           </Reveal>
           <p className="small" style={{ marginTop: 14 }}>
             Annual billing: 2 months free. Prices are on the page &mdash; including Enterprise.{" "}

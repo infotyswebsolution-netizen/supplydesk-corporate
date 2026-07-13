@@ -14,28 +14,28 @@ export const metadata = pageMetadata({
 
 const sections = [
   {
-    idx: "SEC 01 / Data isolation",
+    idx: "Data isolation",
     note: "Per-supplier",
     paragraphs: [
       "Each supplier's data is completely isolated. Buyers from one supplier cannot see or access another supplier's catalog, orders, or pricing. Isolation is enforced with row-level security at the database level — not just in the application code.",
     ],
   },
   {
-    idx: "SEC 02 / Access control",
+    idx: "Access control",
     note: "Per-buyer",
     paragraphs: [
       "Buyers log in to a private portal scoped to your account. They see only the products you've assigned to them, at the prices you've set for them. No buyer can access another buyer's orders, catalog, or pricing — including buyers on the same account.",
     ],
   },
   {
-    idx: "SEC 03 / Payments & billing",
+    idx: "Payments & billing",
     note: "Stripe",
     paragraphs: [
       "Payment processing runs through Stripe. SupplyDesk never stores card numbers — they go directly to Stripe and stay there. PCI compliance is handled by Stripe's certified infrastructure.",
     ],
   },
   {
-    idx: "SEC 04 / Infrastructure",
+    idx: "Infrastructure",
     note: "Vercel + Supabase",
     paragraphs: [
       "SupplyDesk is hosted on Vercel and Supabase, with uptime monitoring. Data is encrypted in transit (TLS) and at rest. Backups are handled by Supabase infrastructure.",
@@ -46,7 +46,7 @@ const sections = [
     ],
   },
   {
-    idx: "SEC 05 / Support & incident response",
+    idx: "Support & incident response",
     note: "What happens if something breaks",
     paragraphs: [
       "If something goes wrong — an outage, a sync failure, a data question — you email us directly and a person answers. There's no ticket queue that disappears for a week. Enterprise accounts get a dedicated contact; every other plan reaches the same team, just without a guaranteed response window.",
