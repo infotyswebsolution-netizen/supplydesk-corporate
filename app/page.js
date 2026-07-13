@@ -43,8 +43,8 @@ export default function HomePage() {
           <span>Form SD-100 &middot; Rev 06/26</span>
           <div className="right">
             <span>Private B2B ordering</span>
-            <span>Columbus, Ohio</span>
-            <span>Est. 2024</span>
+            <span>Ontario, Canada</span>
+            <span>Est. 2023</span>
           </div>
         </div>
       </div>

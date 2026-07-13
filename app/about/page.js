@@ -13,9 +13,9 @@ export const metadata = pageMetadata({
   path: "/about",
 });
 
-// mainEntity omits address/foundingDate for the same reason noted in
-// app/layout.js — the "Columbus, Ohio · Est. 2024" copy on this page is
-// unconfirmed and must not be propagated into structured data.
+// Confirmed by Nik: founded 2023, Ontario, Canada (no city/street/postal
+// code given, so address stays region + country only — not guessing more
+// precision than was provided).
 const aboutPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
@@ -24,6 +24,12 @@ const aboutPageJsonLd = {
     "@type": "Organization",
     name: ORG_NAME,
     url: SITE_URL,
+    foundingDate: "2023",
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "Ontario",
+      addressCountry: "CA",
+    },
   },
 };
 
@@ -36,7 +42,7 @@ export default function AboutPage() {
 
       <header className="po-section">
         <div className="container">
-          <SectionHead idx="About / Why this exists" note="Est. 2024" />
+          <SectionHead idx="About / Why this exists" note="Est. 2023" />
           <h1 className="display-1" style={{ maxWidth: "20ch" }}>
             Nothing purpose-built existed for industrial suppliers. So we built it.
           </h1>
@@ -93,10 +99,10 @@ export default function AboutPage() {
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", padding: "14px 20px", borderBottom: "1px solid var(--line)" }}>
-              <span className="small">Founded</span><span className="mono-data" style={{ fontSize: 14 }}>2024</span>
+              <span className="small">Founded</span><span className="mono-data" style={{ fontSize: 14 }}>2023</span>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", padding: "14px 20px", borderBottom: "1px solid var(--line)" }}>
-              <span className="small">Based in</span><span className="mono-data" style={{ fontSize: 14 }}>Columbus, Ohio</span>
+              <span className="small">Based in</span><span className="mono-data" style={{ fontSize: 14 }}>Ontario, Canada</span>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", padding: "14px 20px", borderBottom: "1px solid var(--line)" }}>
               <span className="small">Team</span><span className="mono-data" style={{ fontSize: 14 }}>Small, and answers its own support email</span>

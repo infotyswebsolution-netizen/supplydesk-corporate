@@ -34,16 +34,21 @@ export const metadata = {
     "SupplyDesk gives industrial suppliers a private ordering portal for their buyers — dedicated login, custom catalog, private pricing, order management.",
 };
 
-// Organization identity fields (address, foundingDate) are intentionally
-// omitted — the "Columbus, Ohio · Est. 2024" copy on Home/About has not been
-// confirmed as accurate and must not be encoded into machine-readable
-// structured data. Add them once confirmed.
+// Confirmed by Nik: founded 2023, Ontario, Canada (no city/street/postal
+// code given, so address stays region + country only — not guessing more
+// precision than was provided).
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: ORG_NAME,
   url: SITE_URL,
   logo: `${SITE_URL}/logo.svg`,
+  foundingDate: "2023",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "Ontario",
+    addressCountry: "CA",
+  },
 };
 
 export default function RootLayout({ children }) {
