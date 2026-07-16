@@ -13,7 +13,7 @@ export function SiteFooter({ formNumber }) {
         <Link href="/contact">Contact</Link>
         <span className="legal">
           {formNumber ? `${formNumber} · ` : ""}
-          &copy; SupplyDesk 2026
+          &copy; SupplyDesk {new Date().getFullYear()}
         </span>
       </div>
     </footer>

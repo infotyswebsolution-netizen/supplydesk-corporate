@@ -1,4 +1,5 @@
 import "./page.css";
+import "./pricing/pricing.css";
 import { Nav } from "@/components/Nav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FooterCta } from "@/components/FooterCta";
@@ -10,12 +11,20 @@ import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL, ORG_NAME, pageMetadata } from "@/lib/site";
 import { plans } from "@/lib/pricing";
 
-export const metadata = pageMetadata({
-  title: "Private ordering portals for industrial suppliers",
-  description:
-    "Your buyers still order by phone, email, and PDF price list. SupplyDesk replaces all three with a private buyer portal — their catalog, their price, their order history.",
-  path: "/",
-});
+export const metadata = {
+  ...pageMetadata({
+    title: "Private ordering portals for industrial suppliers",
+    description:
+      "Your buyers still order by phone, email, and PDF price list. SupplyDesk replaces all three with a private buyer portal — their catalog, their price, their order history.",
+    path: "/",
+  }),
+  // Home's page.js shares the root route segment with the layout that
+  // defines title.template ("%s — SupplyDesk"), so that template never
+  // applies here (Next.js: a parent's template only reaches child
+  // segments) — every other page gets the "— SupplyDesk" suffix in its
+  // <title>, Home wouldn't without this override.
+  title: { absolute: "Private ordering portals for industrial suppliers — SupplyDesk" },
+};
 
 const softwareApplicationJsonLd = {
   "@context": "https://schema.org",

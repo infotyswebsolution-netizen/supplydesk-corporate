@@ -87,34 +87,13 @@
 @media (max-width: 860px) { .order-form .hide-m { display: none; } }
 
 /* Below 560px the table's remaining columns (Plan, Buyers, $/mo, Detail)
-   no longer fit even with .hide-m applied. Swap to the same plan-doc card
-   treatment PricingPlans.jsx already uses responsively, instead of a
+   no longer fit even with .hide-m applied. Swap to the .plan-doc card
+   treatment from pricing.css (imported above) — PricingPlans.jsx already
+   uses it responsively, so this reuses the same rules instead of a
    one-off mobile table pattern. */
 .order-cards { display: none; }
 @media (max-width: 560px) {
   .order-form table { display: none; }
   .order-cards { display: flex; flex-direction: column; gap: 16px; }
 }
-.order-cards .plan-doc {
-  background: var(--surface-card); border: 1px solid var(--line); border-radius: var(--radius-1);
-  display: flex; flex-direction: column;
-}
-.order-cards .doc-head { border-bottom: 2px solid var(--ink); padding: 16px 20px 12px; display: flex; align-items: baseline; }
-.order-cards .doc-head .mono-label { color: var(--ink); }
-.order-cards .doc-body { padding: 6px 20px 20px; flex: 1; display: flex; flex-direction: column; }
-.order-cards .plan-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font: var(--type-small); color: var(--ink); }
-.order-cards .plan-row .val { font: var(--type-mono-data); font-size: 13px; }
-.order-cards .plan-row .yes { color: var(--stamp-green); }
-.order-cards .plan-row .no { color: var(--text-muted); }
-.order-cards .plan-growth { border: 2px solid var(--ink); position: relative; }
-.order-cards .plan-growth::before {
-  content: "Most start here"; position: absolute; top: -13px; left: 20px;
-  font: var(--type-mono-label); letter-spacing: .08em; text-transform: uppercase;
-  background: var(--weld); color: #fff; padding: 5px 10px;
-}
-.order-cards .plan-ent { background: var(--surface-dark); color: var(--text-inverse); border-color: var(--ink); }
-.order-cards .plan-ent .doc-head { border-bottom-color: var(--steel-2); }
-.order-cards .plan-ent .plan-row { color: var(--text-inverse); border-bottom-color: #3a3f44; }
-.order-cards .plan-ent .plan-row .no { color: var(--steel-2); }
-.order-cards .plan-ent .plan-row .yes { color: #6fa986; }
-.order-cards .plan-ent .doc-head .mono-label { color: #a8b0b6; }
+.order-cards .plan-growth::before { content: "Most start here"; }
