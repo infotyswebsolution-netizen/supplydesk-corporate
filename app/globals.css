@@ -157,7 +157,7 @@ p { text-wrap: pretty; }
 .nav-link { font: 500 15px/1 var(--font-body); color: var(--text-secondary); padding: 6px 0; border-bottom: 2px solid transparent; }
 .nav-link:hover { color: var(--ink); }
 .nav-link[aria-current="page"] { color: var(--ink); border-bottom-color: var(--weld); }
-.nav-burger { display: none; margin-left: auto; background: none; border: 1px solid var(--line); border-radius: var(--radius-1); padding: 8px 10px; cursor: pointer; font: var(--type-mono-label); letter-spacing: .08em; }
+.nav-burger { display: none; align-items: center; justify-content: center; min-height: 44px; margin-left: auto; background: none; border: 1px solid var(--line); border-radius: var(--radius-1); padding: 8px 16px; cursor: pointer; font: var(--type-mono-label); letter-spacing: .08em; }
 
 /* ---------- Nav dropdown (Product subcategories) ---------- */
 .nav-drop { position: relative; }
@@ -305,6 +305,8 @@ p { text-wrap: pretty; }
   padding: 12px 14px; width: 100%;
 }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: var(--focus-ring); }
+.field.has-error input, .field.has-error select, .field.has-error textarea { border-color: var(--alert); }
+.field .err { font: 500 13px/1.4 var(--font-mono); color: var(--alert); }
 .field-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 
 /* ---------- Split layout (hero/text + frame pairs) ---------- */
@@ -332,7 +334,7 @@ p { text-wrap: pretty; }
   .nav-link { padding: 12px 0; width: 100%; }
   .nav-links .btn { margin-top: 8px; }
   .nav-links.open { display: flex; }
-  .nav-burger { display: block; }
+  .nav-burger { display: inline-flex; }
   .po-section { padding: var(--space-7) 0; }
   .nav-drop { width: 100%; }
   .nav-drop-trigger { width: 100%; justify-content: space-between; padding: 12px 0; }

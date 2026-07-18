@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SectionHead } from "@/components/SectionHead";
@@ -164,16 +165,45 @@ export default function ProductPage() {
       <section className="po-section" id="quickbooks">
         <div className="container">
           <SectionHead idx="SEC 03 / Integrations" note="QuickBooks only — on purpose" />
-          <div style={{ maxWidth: "62ch", marginTop: 24 }}>
-            <h3 className="title">QuickBooks &middot; Growth and Enterprise plans</h3>
-            <p style={{ marginTop: 10, color: "var(--text-secondary)" }}>
-              Invoices push to QuickBooks automatically when you confirm an order. Customers
-              and items map once during setup; after that there&rsquo;s nothing to maintain.
-            </p>
-          </div>
-          <div style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap" }}>
-            <Button href="/pricing">See pricing</Button>
-            <Button href="/contact" variant="secondary">Talk to us</Button>
+          <div className="split" style={{ marginTop: 24 }}>
+            <div>
+              <h3 className="title">QuickBooks &middot; Growth and Enterprise plans</h3>
+              <p style={{ marginTop: 10, color: "var(--text-secondary)" }}>
+                Invoices push to QuickBooks automatically when you confirm an order. Customers
+                and items map once during setup; after that there&rsquo;s nothing to maintain.
+              </p>
+              <p style={{ marginTop: 16, color: "var(--text-secondary)" }}>
+                Line items, quantities, unit prices, the buyer-to-customer match, and the PO
+                number all map on their own once that one-time setup is done. The only manual
+                steps left: matching a brand-new product or buyer to QuickBooks the first time,
+                and marking an invoice paid in QuickBooks itself &mdash; SupplyDesk creates the
+                invoice correctly, it doesn&rsquo;t run your books for you.{" "}
+                <Link className="text-link" href="/blog/quickbooks-sync" style={{ fontSize: 14 }}>
+                  Read the full sync sequence &rarr;
+                </Link>
+              </p>
+              <div style={{ display: "flex", gap: 16, marginTop: 28, flexWrap: "wrap" }}>
+                <Button href="/pricing">See pricing</Button>
+                <Button href="/contact" variant="secondary">Talk to us</Button>
+              </div>
+            </div>
+
+            <Reveal className="frame">
+              <div className="portal-head">
+                <span className="portal-brand">Sync ledger</span>
+                <span className="portal-tag">QuickBooks</span>
+              </div>
+              <table className="ptable">
+                <thead>
+                  <tr><th>Order</th><th>Stage</th><th></th></tr>
+                </thead>
+                <tbody>
+                  <tr><td className="sku">#SD-2215</td><td>Order confirmed</td><td><Badge tone="accent">New</Badge></td></tr>
+                  <tr><td className="sku">#SD-2214</td><td>Invoice created in QuickBooks</td><td><Badge>Pending</Badge></td></tr>
+                  <tr><td className="sku">#SD-2213</td><td>Synced to QuickBooks</td><td><Badge tone="success">Synced</Badge></td></tr>
+                </tbody>
+              </table>
+            </Reveal>
           </div>
         </div>
       </section>

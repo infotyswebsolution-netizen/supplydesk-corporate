@@ -45,6 +45,9 @@ export function PricingPlans() {
                 {billing === "monthly"
                   ? "billed monthly"
                   : `billed annually ($${annualTotal(plan.monthly).toLocaleString()}/yr)`}
+                {billing === "annual" ? (
+                  <span className="mono-label" style={{ marginLeft: 8 }}>&mdash; 2 months free</span>
+                ) : null}
               </p>
               <div style={{ marginTop: 16 }}>
                 {plan.rows.map((row) => (
