@@ -2,25 +2,16 @@
 
 import React from "react";
 
-const inputStyle = {
-  font: "var(--type-body)",
-  fontSize: 16,
-  color: "var(--ink)",
-  background: "var(--surface-card)",
-  border: "1px solid var(--line)",
-  borderRadius: "var(--radius-1)",
-  padding: "12px 14px",
-  width: "100%",
-  boxSizing: "border-box",
-};
-
-/** Labeled form control — input, select, or textarea, sharing one label treatment. */
-export function Field({ label, optional, as = "input", options = [], ...rest }) {
+/** Labeled form control — input, select, or textarea, sharing one label
+ * treatment. `error`, if set, switches the control to its error border and
+ * prints the message below as a plain mono sentence (no exclamation marks). */
+export function Field({ label, optional, error, as = "input", options = [], ...rest }) {
   const id = React.useId();
+  const errorId = error ? `${id}-error` : undefined;
   let control;
   if (as === "select") {
     control = (
-      <select id={id} style={inputStyle} defaultValue="" {...rest}>
+      <select id={id} defaultValue="" aria-describedby={errorId} {...rest}>
         <option value="" disabled>
           Select one
         </option>
@@ -30,30 +21,29 @@ export function Field({ label, optional, as = "input", options = [], ...rest }) 
       </select>
     );
   } else if (as === "textarea") {
-    control = <textarea id={id} rows={4} style={inputStyle} {...rest}></textarea>;
+    control = <textarea id={id} rows={4} aria-describedby={errorId} {...rest}></textarea>;
   } else {
-    control = <input id={id} type={as === "input" ? "text" : as} style={inputStyle} {...rest} />;
+    control = (
+      <input id={id} type={as === "input" ? "text" : as} aria-describedby={errorId} {...rest} />
+    );
   }
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      <label
-        htmlFor={id}
-        style={{
-          font: "var(--type-mono-label)",
-          letterSpacing: "0.08em",
-          textTransform: "uppercase",
-          color: "var(--text-secondary)",
-        }}
-      >
-        {label}
-        {optional ? (
-          <span style={{ textTransform: "none", letterSpacing: 0, color: "var(--text-muted)" }}>
-            {" "}
-            (optional)
-          </span>
-        ) : null}
-      </label>
+    <div className={`field${error ? " has-error" : ""}`}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
+        <label htmlFor={id}>{label}</label>
+        <span
+          className="mono-label"
+          style={{ fontSize: 10, color: optional ? "var(--text-muted)" : "var(--weld)", flexShrink: 0 }}
+        >
+          {optional ? "Optional" : "Required"}
+        </span>
+      </div>
       {control}
+      {error ? (
+        <p className="err" id={errorId} role="alert">
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -7,10 +7,10 @@ import { usePathname } from "next/navigation";
 import { Button } from "./Button";
 
 const productLinks = [
-  { href: "/product#catalog", label: "Catalog management" },
-  { href: "/product#buyers", label: "Buyer management" },
   { href: "/product#orders", label: "Order dashboard" },
   { href: "/product#quickbooks", label: "QuickBooks sync" },
+  { href: "/product#catalog", label: "Catalog management" },
+  { href: "/product#buyers", label: "Buyer management" },
 ];
 
 const links = [

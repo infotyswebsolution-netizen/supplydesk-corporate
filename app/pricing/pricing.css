@@ -17,9 +17,9 @@
 .plan-row .no { color: var(--text-muted); }
 .plan-growth { border: 2px solid var(--ink); position: relative; }
 .plan-growth::before {
-  content: "Most suppliers start here";
-  position: absolute; top: -13px; left: 20px;
-  font: var(--type-mono-label); letter-spacing: .08em; text-transform: uppercase;
+  content: "Most start here";
+  position: absolute; top: -11px; left: 20px;
+  font: 500 10px/1.35 var(--font-mono); letter-spacing: .08em; text-transform: uppercase;
   background: var(--weld); color: #fff; padding: 5px 10px;
 }
 .plan-ent { background: var(--surface-dark); color: var(--text-inverse); border-color: var(--ink); }
