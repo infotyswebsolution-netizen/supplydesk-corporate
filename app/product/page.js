@@ -4,12 +4,14 @@ import { SectionHead } from "@/components/SectionHead";
 import { Reveal } from "@/components/Reveal";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Product",
   description:
     "You control the catalog, the pricing, and who gets access. Your buyers get a clean portal that works the way ordering should.",
-};
+  path: "/product",
+});
 
 export default function ProductPage() {
   return (

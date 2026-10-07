@@ -203,7 +203,7 @@ p { text-wrap: pretty; }
   flex-wrap: wrap;
 }
 .po-head .idx { font: var(--type-mono-label); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--ink); }
-.po-head .note { margin-left: auto; font: var(--type-mono-label); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--text-muted); text-align: right; white-space: nowrap; }
+.po-head .note { margin-left: auto; font: var(--type-mono-label); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--text-muted); text-align: right; white-space: normal; max-width: 32ch; }
 
 /* ---------- Portal frame (product UI shown in context) ---------- */
 .frame {

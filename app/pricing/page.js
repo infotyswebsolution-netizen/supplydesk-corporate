@@ -3,12 +3,15 @@ import { Nav } from "@/components/Nav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PricingPlans } from "@/components/PricingPlans";
 import { SectionHead } from "@/components/SectionHead";
+import { JsonLd } from "@/components/JsonLd";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Pricing",
   description:
     "Pay for what you actually use. Plans scale by buyer count. Every plan includes the buyer portal and order management — prices are on the page, including Enterprise.",
-};
+  path: "/pricing",
+});
 
 const questions = [
   {
@@ -41,9 +44,21 @@ const questions = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: questions.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+};
+
 export default function PricingPage() {
   return (
     <>
+      <JsonLd data={faqJsonLd} />
+
       <Nav />
 
       <header className="po-section">

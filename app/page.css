@@ -85,3 +85,15 @@
 .order-form .exc { font: var(--type-mono-label); color: var(--steel-2); }
 .order-form tr.hot td { background: var(--weld-tint); border-top: 2px solid var(--weld); border-bottom: 2px solid var(--weld); }
 @media (max-width: 860px) { .order-form .hide-m { display: none; } }
+
+/* Below 560px the table's remaining columns (Plan, Buyers, $/mo, Detail)
+   no longer fit even with .hide-m applied. Swap to the .plan-doc card
+   treatment from pricing.css (imported above) — PricingPlans.jsx already
+   uses it responsively, so this reuses the same rules instead of a
+   one-off mobile table pattern. */
+.order-cards { display: none; }
+@media (max-width: 560px) {
+  .order-form table { display: none; }
+  .order-cards { display: flex; flex-direction: column; gap: 16px; }
+}
+.order-cards .plan-growth::before { content: "Most start here"; }

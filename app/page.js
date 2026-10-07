@@ -1,4 +1,5 @@
 import "./page.css";
+import "./pricing/pricing.css";
 import { Nav } from "@/components/Nav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FooterCta } from "@/components/FooterCta";
@@ -6,23 +7,53 @@ import { Reveal } from "@/components/Reveal";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { SectionHead } from "@/components/SectionHead";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_URL, ORG_NAME, pageMetadata } from "@/lib/site";
+import { plans } from "@/lib/pricing";
 
 export const metadata = {
-  title: "Private ordering portals for industrial suppliers",
-  description:
-    "Your buyers still order by phone, email, and PDF price list. SupplyDesk replaces all three with a private buyer portal — their catalog, their price, their order history.",
+  ...pageMetadata({
+    title: "Private ordering portals for industrial suppliers",
+    description:
+      "Your buyers still order by phone, email, and PDF price list. SupplyDesk replaces all three with a private buyer portal — their catalog, their price, their order history.",
+    path: "/",
+  }),
+  // Home's page.js shares the root route segment with the layout that
+  // defines title.template ("%s — SupplyDesk"), so that template never
+  // applies here (Next.js: a parent's template only reaches child
+  // segments) — every other page gets the "— SupplyDesk" suffix in its
+  // <title>, Home wouldn't without this override.
+  title: { absolute: "Private ordering portals for industrial suppliers — SupplyDesk" },
+};
+
+const softwareApplicationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: ORG_NAME,
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: SITE_URL,
+  offers: plans.map((plan) => ({
+    "@type": "Offer",
+    name: plan.name,
+    price: String(plan.monthly),
+    priceCurrency: "USD",
+    url: `${SITE_URL}/pricing`,
+  })),
 };
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={softwareApplicationJsonLd} />
+
       <div className="form-strip">
         <div className="container">
           <span>Form SD-100 &middot; Rev 06/26</span>
           <div className="right">
             <span>Private B2B ordering</span>
-            <span>Columbus, Ohio</span>
-            <span>Est. 2024</span>
+            <span>Ontario, Canada</span>
+            <span>Est. 2023</span>
           </div>
         </div>
       </div>
@@ -257,6 +288,38 @@ export default function HomePage() {
                 </tr>
               </tbody>
             </table>
+            <div className="order-cards">
+              {plans.map((plan) => (
+                <div className={`plan-doc ${plan.className}`.trim()} key={plan.key}>
+                  <div className="doc-head">
+                    <span className="mono-label">{plan.name}</span>
+                  </div>
+                  <div className="doc-body">
+                    <p style={{ margin: "14px 0 2px" }}>
+                      <span className="mono-data" style={{ fontSize: 28 }}>${plan.monthly}</span>
+                      <span className="small">/mo</span>
+                    </p>
+                    <div style={{ marginTop: 12 }}>
+                      {plan.rows
+                        .filter((row) => ["Buyers", "QuickBooks sync", "RFQ management"].includes(row.label))
+                        .map((row) => (
+                          <div className="plan-row" key={row.label}>
+                            <span>{row.label}</span>
+                            <span className={`val ${row.tone || ""}`.trim()}>{row.value}</span>
+                          </div>
+                        ))}
+                    </div>
+                    <a
+                      className="text-link"
+                      href="/pricing"
+                      style={{ fontSize: 14, marginTop: 16, display: "inline-block" }}
+                    >
+                      Full detail &rarr;
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
           </Reveal>
           <p className="small" style={{ marginTop: 14 }}>
             Annual billing: 2 months free. Prices are on the page &mdash; including Enterprise.{" "}

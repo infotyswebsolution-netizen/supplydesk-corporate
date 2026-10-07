@@ -12,6 +12,13 @@ export function ContactForm() {
     e.preventDefault();
     const form = formRef.current;
     if (!form.reportValidity()) return;
+
+    // Honeypot: real visitors never see or fill this field. A filled value
+    // means a bot — drop the submission silently rather than showing an
+    // error (that would just teach the bot which field to avoid).
+    const honeypot = form.elements.namedItem("website");
+    if (honeypot && honeypot.value) return;
+
     setSubmitted(true);
   }
 
@@ -55,6 +62,17 @@ export function ContactForm() {
         gap: 20,
       }}
     >
+      {/* Honeypot — hidden from real visitors via CSS, not `display:none`
+          or `type="hidden"` (bots skip those). Left blank by humans;
+          bots that autofill every field trip the check in handleSubmit. */}
+      <div
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}
+        aria-hidden="true"
+      >
+        <label htmlFor="f-website">Website</label>
+        <input id="f-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="field-row">
         <Field label="Your name" name="name" required autoComplete="name" />
         <Field label="Company name" name="company" required autoComplete="organization" />
